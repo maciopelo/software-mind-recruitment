@@ -9,38 +9,7 @@ const initialRegisterForm = {
   submitMessage: "",
 };
 
-const inputs = [
-  {
-    id: 1,
-    name: "name",
-    placeholder: "name",
-    type: "text",
-    label: "Name",
-  },
-  {
-    id: 2,
-    name: "password",
-    placeholder: "password",
-    type: "password",
-    label: "Password",
-  },
-  {
-    id: 3,
-    name: "newsletter",
-    placeholder: "newsletter",
-    type: "checkbox",
-    label: "newsletter",
-  },
-  {
-    id: 4,
-    name: "email",
-    placeholder: "email",
-    type: "text",
-    label: "Email",
-  },
-];
-
-const RegisterForm = () => {
+const RegisterForm = ({ inputs }) => {
   const [registerForm, setRegisterForm] = useState(initialRegisterForm);
 
   const handleInput = (e) => {
@@ -86,13 +55,13 @@ const RegisterForm = () => {
           <FormInput
             key={input.id}
             {...input}
+            render={input.name !== "email" || registerForm.newsletter}
             onChange={handleInput}
             value={registerForm[input.name]}
-            render={Boolean(registerForm.newsletter || input.name !== "email")}
           />
         ))}
         <button form="register-form" type="submit">
-          zarejestruj
+          register
         </button>
       </form>
       <span>{registerForm.submitMessage}</span>
